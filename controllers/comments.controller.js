@@ -1,7 +1,8 @@
 // I use axios because it allows me to do an easy asynchronous HTTP request to REST API.
 const axios = require('axios');
+const keys = require('../global_keys/keys');
 
-const url = 'http://gorest.co.in/public/v2/posts';
+const url = keys.REST_API_URL;
 
 const getComments = async (req, res) => {
     try {
@@ -19,7 +20,7 @@ const createComment = async (req, res) => {
     try {
         const { postID } = req.params;
         const { id, post_id, name, email, body } = req.body;
-        const token = 'db2731ec124ce0fa02b868043f6c679bdb933f0219e9eea6ce8bc95e9dfe1053';
+        const token = keys.TOKEN;
 
         const headers = {
             'Content-Type': 'application/json',
@@ -37,7 +38,7 @@ const createComment = async (req, res) => {
             },
             { headers },
         );
-        res.status(201).json(response.data.data);
+        res.status(201).json(response.data);
     } catch (error) {
         console.error(error);
         res.status(500).send('Server Error in POST request');
