@@ -6,6 +6,6 @@ const router = express.Router();
 /* Getting or creating posts */
 router.get('/posts', getPosts);
 
-//router.post('/users/:postID/posts', createUserPost);
+// router.post('/users/:postID/posts', createUserPost);
 
 module.exports = router;
