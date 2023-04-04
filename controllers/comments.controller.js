@@ -8,10 +8,10 @@ const url = keys.REST_API_URL;
 const getComments = async (req, res) => {
     try {
         const { postID } = req.params;
-        const response = await axios.get(`${url}/${postID}/comments`);
+        const response = await axios.get(`${url}/${postID}/comments`); // actually, only high-level code
         res.status(200).json(response.data);
     } catch (error) {
-        console.error(error);
+        console.log(error);
         res.status(500).send('Server Error');
     }
 };
