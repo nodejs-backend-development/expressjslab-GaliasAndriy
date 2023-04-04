@@ -1,6 +1,7 @@
 // I use axios because it allows me to do an easy asynchronous HTTP request to REST API.
 const axios = require('axios');
 const keys = require('../global_keys/keys');
+const { createCommentRequest } = require('../clients/httpClient');
 
 const url = keys.REST_API_URL;
 
@@ -20,25 +21,18 @@ const createComment = async (req, res) => {
     try {
         const { postID } = req.params;
         const { id, post_id, name, email, body } = req.body;
-        const token = keys.TOKEN;
 
-        const headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-        };
+        if (parseInt(postID) !== post_id) {
+            res.status(400).send('postID parameter and post_id field must be the same value');
+            return;
+        }
 
-        const response = await axios.post(
+        const commentData = await createCommentRequest(
             `${url}/${postID}/comments`,
-            {
-                id,
-                post_id,
-                name,
-                email,
-                body,
-            },
-            { headers },
+            JSON.stringify({ id, post_id, name, email, body }),
         );
-        res.status(201).json(response.data);
+
+        res.status(201).json(commentData);
     } catch (error) {
         console.error(error);
         res.status(500).send('Server Error in POST request');
