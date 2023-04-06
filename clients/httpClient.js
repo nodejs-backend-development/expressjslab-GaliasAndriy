@@ -9,7 +9,7 @@ const createCommentRequest = async (url, body) => {
             Authorization: `Bearer ${token}`,
         };
 
-        const response = await axios.post(url, body, { headers });
+        const response = await axios.post(url, JSON.stringify(body), { headers });
         return response.data;
     } catch (error) {
         console.error(error);

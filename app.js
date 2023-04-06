@@ -27,7 +27,7 @@ app.use(requestDuration.duration);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use(commentsRouter); // Here i have the same paths inside my controller, so i don't need to specify it here
-app.use('/posts', postsRouter); // not necessary controller for my variant
+app.use('/', postsRouter); // not necessary controller for my variant
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
